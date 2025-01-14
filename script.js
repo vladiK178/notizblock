@@ -1,3 +1,4 @@
+let notesTitle = ["Ba", "Aufgabe"];
 let notes = ["banane", "rasen mähen"];
 
 //wann werden die Notizen angezeigt -> beim laden der Seite (onload)
