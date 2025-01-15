@@ -1,67 +1,97 @@
 let notesTitles = ["Ba", "Aufgabe"];
 let notes = ["banane", "rasen mähen"];
-
 let trashNotesTitle = [];
 let trashNotes = [];
 
-//wann werden die Notizen angezeigt -> beim laden der Seite (onload)
+function init() {
+  getFromLocalStorage();
+  renderNotes();
+  renderTrashNotes();
+}
+
+function getFromLocalStorage() {
+  let storedNotesTitles = JSON.parse(localStorage.getItem("notesTitles"));
+  let storedNotes = JSON.parse(localStorage.getItem("notes"));
+  let storedTrashNotesTitle = JSON.parse(
+    localStorage.getItem("trashNotesTitle")
+  );
+  let storedTrashNotes = JSON.parse(localStorage.getItem("trashNotes"));
+
+  if (storedNotesTitles != null) notesTitles = storedNotesTitles;
+  if (storedNotes != null) notes = storedNotes;
+  if (storedTrashNotesTitle != null) trashNotesTitle = storedTrashNotesTitle;
+  if (storedTrashNotes != null) trashNotes = storedTrashNotes;
+}
+
+function saveToLocalStorage() {
+  localStorage.setItem("notesTitles", JSON.stringify(notesTitles));
+  localStorage.setItem("notes", JSON.stringify(notes));
+  localStorage.setItem("trashNotesTitle", JSON.stringify(trashNotesTitle));
+  localStorage.setItem("trashNotes", JSON.stringify(trashNotes));
+}
+
 function renderNotes() {
-  let contentRef = document.getElementById("content"); //wo werden die Notizen angezeigt
-  contentRef.innerHTML = ""; //leer lassen
+  let contentRef = document.getElementById("content");
+  contentRef.innerHTML = "";
 
   for (let indexNote = 0; indexNote < notes.length; indexNote++) {
-    // for (const indexNote of notes) {                                 <--- //alternativ
-    // contentRef.innerHTML += getNoteTemplate(indexNote);
-    // }
     contentRef.innerHTML += getNoteTemplate(indexNote);
   }
 }
 
 function renderTrashNotes() {
-  let trashcontentRef = document.getElementById("trash_content"); //wo werden die Notizen angezeigt
-  trashcontentRef.innerHTML = ""; //leer lassen
+  let trashcontentRef = document.getElementById("trash_content");
+  trashcontentRef.innerHTML = "";
 
   for (
     let indexTrashNote = 0;
     indexTrashNote < trashNotes.length;
     indexTrashNote++
   ) {
-    trashcontentRef.innerHTML += getNoteTemplate(indexTrashNote);
+    trashcontentRef.innerHTML += getTrashNoteTemplate(indexTrashNote);
   }
 }
 
 function getNoteTemplate(indexNote) {
-  return `<p>+ ${notesTitles[indexNote]} -> ${notes[indexNote]}<button onclick="deleteNote(${indexNote})">X</button></p>`;
+  return `<p>+ ${notesTitles[indexNote]} -> ${notes[indexNote]}<button onclick="notetoTrash(${indexNote})">X</button></p>`;
 }
 
 function getTrashNoteTemplate(indexTrashNote) {
   return `<p>+ ${trashNotesTitle[indexTrashNote]} -> ${trashNotes[indexTrashNote]}<button onclick="deleteNote(${indexTrashNote})">X</button></p>`;
 }
 
-//notizen hinzufügen
 function addNote() {
+  let titleInputRef = document.getElementById("title_input");
   let noteInputRef = document.getElementById("note_input");
-  let noteInput = noteInputRef.value; //eingabe auslesen
 
-  notes.push(noteInput); //eingabe den notizen hinzufügen
-  renderNotes(); //eingabe anzeigen lassen
+  if (titleInputRef.value != "" && noteInputRef.value != "") {
+    notesTitles.push(titleInputRef.value);
+    notes.push(noteInputRef.value);
 
-  noteInputRef.value = "";
+    saveToLocalStorage();
+    renderNotes();
+
+    titleInputRef.value = "";
+    noteInputRef.value = "";
+  }
 }
 
 function notetoTrash(indexNote) {
-  let trashNote = notes.splice(indexNote, 1); //notizen löschen
-  trashNotes.push(trashNote[0]);
-  let trashNoteTitle = notesTitles.splice(indexNote, 1); //notizen löschen
-  trashNotesTitle.push(trashNoteTitle[0]);
+  trashNotes.push(notes[indexNote]);
+  trashNotesTitle.push(notesTitles[indexNote]);
 
-  renderNotes(); // anzeige updaten
+  notes.splice(indexNote, 1);
+  notesTitles.splice(indexNote, 1);
+
+  saveToLocalStorage();
+  renderNotes();
   renderTrashNotes();
 }
 
-//notizen löschen
 function deleteNote(indexTrashNote) {
-  trashNotes.splice(indexTrashNote, 1); //notizen löschen
-  renderNotes(); // anzeige updaten
+  trashNotes.splice(indexTrashNote, 1);
+  trashNotesTitle.splice(indexTrashNote, 1);
+
+  saveToLocalStorage();
   renderTrashNotes();
 }
