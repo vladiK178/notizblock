@@ -25,12 +25,19 @@ h2 {
   border-bottom: 2px solid #ddd;
 }
 
+.input-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
 input[type="text"] {
   padding: 10px;
-  margin-right: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
-  width: 200px;
+  flex: 1;
+  min-width: 200px;
   font-size: 14px;
 }
 
@@ -56,6 +63,7 @@ button:hover {
 }
 
 #content,
+#archive_content,
 #trash_content {
   background-color: white;
   padding: 20px;
@@ -64,8 +72,7 @@ button:hover {
   margin-bottom: 20px;
 }
 
-#content p,
-#trash_content p {
+p {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -76,21 +83,41 @@ button:hover {
   transition: background-color 0.2s;
 }
 
-#content p:hover,
-#trash_content p:hover {
+p:hover {
   background-color: #e9ecef;
 }
 
-#content p button,
-#trash_content p button {
-  background-color: #dc3545;
-  padding: 5px 10px;
-  font-size: 12px;
-  margin-left: 10px;
+.button-group {
+  display: flex;
+  gap: 5px;
 }
 
-#content p button:hover,
-#trash_content p button:hover {
+.button-group button {
+  padding: 5px 10px;
+  font-size: 12px;
+}
+
+.archive-btn {
+  background-color: #6c757d;
+}
+
+.archive-btn:hover {
+  background-color: #5a6268;
+}
+
+.restore-btn {
+  background-color: #28a745;
+}
+
+.restore-btn:hover {
+  background-color: #218838;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+}
+
+.delete-btn:hover {
   background-color: #c82333;
 }
 
@@ -99,11 +126,11 @@ button:hover {
     padding: 10px;
   }
 
-  input[type="text"] {
-    width: 100%;
-    margin-bottom: 10px;
+  .input-container {
+    flex-direction: column;
   }
 
+  input[type="text"],
   button {
     width: 100%;
   }
