@@ -164,6 +164,18 @@ function restoreFromTrash(index) {
   renderTrashNotes();
 }
 
+function noteToTrash(index) {
+  allNotes.trashNotes.push(allNotes.notes[index]);
+  allNotes.trashNotesTitle.push(allNotes.notesTitles[index]);
+
+  allNotes.notes.splice(index, 1);
+  allNotes.notesTitles.splice(index, 1);
+
+  saveToLocalStorage();
+  renderNotes();
+  renderTrashNotes();
+}
+
 function deleteNote(indexTrashNote) {
   trashNotes.splice(indexTrashNote, 1);
   trashNotesTitle.splice(indexTrashNote, 1);
