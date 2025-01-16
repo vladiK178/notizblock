@@ -94,6 +94,18 @@ function addNote() {
   }
 }
 
+function archiveToTrash(index) {
+  allNotes.trashNotes.push(allNotes.archivNotes[index]);
+  allNotes.trashNotesTitle.push(allNotes.archivNotesTitles[index]);
+
+  allNotes.archivNotes.splice(index, 1);
+  allNotes.archivNotesTitles.splice(index, 1);
+
+  saveToLocalStorage();
+  renderArchiveNotes();
+  renderTrashNotes();
+}
+
 function notetoTrash(indexNote) {
   trashNotes.push(notes[indexNote]);
   trashNotesTitle.push(notesTitles[indexNote]);
