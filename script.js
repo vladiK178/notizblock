@@ -56,12 +56,26 @@ function renderTrashNotes() {
   }
 }
 
-function getNoteTemplate(indexNote) {
-  return `<p>+ ${notesTitles[indexNote]} -> ${notes[indexNote]}<button onclick="notetoTrash(${indexNote})">X</button></p>`;
+function getArchiveNoteTemplate(index) {
+  return `
+      <p>
+          + ${allNotes.archivNotesTitles[index]} -> ${allNotes.archivNotes[index]}
+          <div class="button-group">
+              <button onclick="restoreFromArchive(${index})" class="restore-btn">📤</button>
+              <button onclick="archiveToTrash(${index})" class="delete-btn">🗑️</button>
+          </div>
+      </p>`;
 }
 
-function getTrashNoteTemplate(indexTrashNote) {
-  return `<p>+ ${trashNotesTitle[indexTrashNote]} -> ${trashNotes[indexTrashNote]}<button onclick="deleteNote(${indexTrashNote})">X</button></p>`;
+function getTrashNoteTemplate(index) {
+  return `
+      <p>
+          + ${allNotes.trashNotesTitle[index]} -> ${allNotes.trashNotes[index]}
+          <div class="button-group">
+              <button onclick="restoreFromTrash(${index})" class="restore-btn">↩️</button>
+              <button onclick="deleteNote(${index})" class="delete-btn">❌</button>
+          </div>
+      </p>`;
 }
 
 function addNote() {
