@@ -43,6 +43,15 @@ function renderNotes() {
   }
 }
 
+function renderArchiveNotes() {
+  let archiveContentRef = document.getElementById("archive_content");
+  archiveContentRef.innerHTML = "";
+
+  for (let i = 0; i < allNotes.archivNotes.length; i++) {
+    archiveContentRef.innerHTML += getArchiveNoteTemplate(i);
+  }
+}
+
 function renderTrashNotes() {
   let trashcontentRef = document.getElementById("trash_content");
   trashcontentRef.innerHTML = "";
