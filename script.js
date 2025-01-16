@@ -164,6 +164,18 @@ function restoreFromTrash(index) {
   renderTrashNotes();
 }
 
+function restoreFromArchive(index) {
+  allNotes.notes.push(allNotes.archivNotes[index]);
+  allNotes.notesTitles.push(allNotes.archivNotesTitles[index]);
+
+  allNotes.archivNotes.splice(index, 1);
+  allNotes.archivNotesTitles.splice(index, 1);
+
+  saveToLocalStorage();
+  renderNotes();
+  renderArchiveNotes();
+}
+
 function noteToTrash(index) {
   allNotes.trashNotes.push(allNotes.notes[index]);
   allNotes.trashNotesTitle.push(allNotes.notesTitles[index]);
