@@ -93,7 +93,29 @@ function addNote() {
     noteInputRef.value = "";
   }
 }
+function noteToArchive(index) {
+  allNotes.archivNotes.push(allNotes.notes[index]);
+  allNotes.archivNotesTitles.push(allNotes.notesTitles[index]);
 
+  allNotes.notes.splice(index, 1);
+  allNotes.notesTitles.splice(index, 1);
+
+  saveToLocalStorage();
+  renderNotes();
+  renderArchiveNotes();
+}
+
+function restoreFromArchive(index) {
+  allNotes.notes.push(allNotes.archivNotes[index]);
+  allNotes.notesTitles.push(allNotes.archivNotesTitles[index]);
+
+  allNotes.archivNotes.splice(index, 1);
+  allNotes.archivNotesTitles.splice(index, 1);
+
+  saveToLocalStorage();
+  renderNotes();
+  renderArchiveNotes();
+}
 function archiveToTrash(index) {
   allNotes.trashNotes.push(allNotes.archivNotes[index]);
   allNotes.trashNotesTitle.push(allNotes.archivNotesTitles[index]);
