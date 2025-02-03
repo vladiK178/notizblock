@@ -1,33 +1,41 @@
+@font-face {
+  font-family: "Roboto";
+  src: url("./assets/fonts/Roboto-VariableFont_wdth,wght.ttf")
+    format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Arial", sans-serif;
+  font-family: "Roboto", sans-serif;
   scroll-behavior: smooth;
 }
 
 body {
   padding: 20px;
-  background-color: #f5f5f5;
+  background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
   max-width: 800px;
   margin: 0 auto;
-}
-
-a {
-  text-decoration: none;
+  color: #333;
 }
 
 h1 {
-  color: #333;
+  color: #1e293b;
   margin-bottom: 30px;
   text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
 }
 
 h2 {
-  color: #444;
+  color: #334155;
   margin: 20px 0;
   padding-bottom: 5px;
-  border-bottom: 2px solid #ddd;
+  border-bottom: 2px solid #cbd5e1;
+  font-size: 1.5rem;
 }
 
 .input-container {
@@ -38,33 +46,38 @@ h2 {
 }
 
 input[type="text"] {
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  padding: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
   flex: 1;
   min-width: 200px;
   font-size: 14px;
+  background-color: #ffffff;
+  transition: all 0.3s ease;
 }
 
 input[type="text"]:focus {
   outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+  border-color: #3b82f6;
+  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3);
+  background-color: #f0f9ff;
 }
 
 button {
-  padding: 10px 20px;
-  background-color: #007bff;
+  padding: 12px 24px;
+  background-color: #3b82f6;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 14px;
-  transition: background-color 0.3s;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #2563eb;
+  transform: scale(1.05); /* ✨ Leichter Hover-Effekt */
 }
 
 #content,
@@ -72,58 +85,68 @@ button:hover {
 #trash_content {
   background-color: white;
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* 🖤 Mehr Tiefe */
   margin-bottom: 20px;
+  transition: transform 0.3s ease;
+}
+
+#content:hover,
+#archive_content:hover,
+#trash_content:hover {
+  transform: translateY(-5px);
 }
 
 p {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
-  margin: 5px 0;
-  background-color: #f8f9fa;
-  border-radius: 4px;
-  transition: background-color 0.2s;
+  padding: 12px;
+  margin: 8px 0;
+  background-color: #f8fafc;
+  border-radius: 8px;
+  transition: background-color 0.2s, transform 0.2s;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 p:hover {
-  background-color: #e9ecef;
+  background-color: #e2e8f0;
+  transform: scale(1.02);
 }
 
 .button-group {
   display: flex;
-  gap: 5px;
+  gap: 8px;
 }
 
 .button-group button {
-  padding: 5px 10px;
+  padding: 8px 16px;
   font-size: 12px;
+  border-radius: 6px;
 }
 
 .archive-btn {
-  background-color: #6c757d;
+  background-color: #64748b;
 }
 
 .archive-btn:hover {
-  background-color: #5a6268;
+  background-color: #475569;
 }
 
 .restore-btn {
-  background-color: #28a745;
+  background-color: #10b981;
 }
 
 .restore-btn:hover {
-  background-color: #218838;
+  background-color: #059669;
 }
 
 .delete-btn {
-  background-color: #dc3545;
+  background-color: #ef4444;
 }
 
 .delete-btn:hover {
-  background-color: #c82333;
+  background-color: #dc2626;
 }
 
 @media (max-width: 600px) {
