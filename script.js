@@ -1,6 +1,6 @@
 let allNotes = {
-  notesTitles: ["Ba", "Aufgabe"],
-  notes: ["banane", "rasen mähen"],
+  notesTitles: [],
+  notes: [],
   archivNotesTitles: [],
   archivNotes: [],
   trashNotesTitle: [],
@@ -12,17 +12,6 @@ function init() {
   renderNotes();
   renderArchiveNotes();
   renderTrashNotes();
-}
-
-function getFromLocalStorage() {
-  const storedNotes = JSON.parse(localStorage.getItem("allNotes"));
-  if (storedNotes) {
-    allNotes = storedNotes;
-  }
-}
-
-function saveToLocalStorage() {
-  localStorage.setItem("allNotes", JSON.stringify(allNotes));
 }
 
 function renderNotes() {
@@ -50,39 +39,6 @@ function renderTrashNotes() {
   for (let i = 0; i < allNotes.trashNotes.length; i++) {
     trashContentRef.innerHTML += getTrashNoteTemplate(i);
   }
-}
-
-function getNoteTemplate(index) {
-  return `
-      <p>
-          + ${allNotes.notesTitles[index]} -> ${allNotes.notes[index]}
-          <div class="button-group">
-              <button onclick="noteToArchive(${index})" class="archive-btn">📁</button>
-              <button onclick="noteToTrash(${index})" class="delete-btn">🗑️</button>
-          </div>
-      </p>`;
-}
-
-function getArchiveNoteTemplate(index) {
-  return `
-      <p>
-          + ${allNotes.archivNotesTitles[index]} -> ${allNotes.archivNotes[index]}
-          <div class="button-group">
-              <button onclick="restoreFromArchive(${index})" class="restore-btn">📤</button>
-              <button onclick="archiveToTrash(${index})" class="delete-btn">🗑️</button>
-          </div>
-      </p>`;
-}
-
-function getTrashNoteTemplate(index) {
-  return `
-      <p>
-          + ${allNotes.trashNotesTitle[index]} -> ${allNotes.trashNotes[index]}
-          <div class="button-group">
-              <button onclick="restoreFromTrash(${index})" class="restore-btn">↩️</button>
-              <button onclick="deleteNote(${index})" class="delete-btn">❌</button>
-          </div>
-      </p>`;
 }
 
 function addNote() {
